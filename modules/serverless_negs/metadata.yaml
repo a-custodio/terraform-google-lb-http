@@ -25,7 +25,7 @@ spec:
       repo: https://github.com/terraform-google-modules/terraform-google-lb-http.git
       sourceType: git
       dir: /modules/serverless_negs
-    version: 14.2.0
+    version: 14.3.0
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
@@ -52,6 +52,8 @@ spec:
         location: examples/external-lb-backend-bucket
       - name: gke-node-port
         location: examples/https-gke/gke-node-port
+      - name: pqc-gke-node-port
+        location: examples/pqc-https-gke/gke-node-port
       - name: https-gke
         location: examples/https-gke
       - name: https-redirect
@@ -70,6 +72,8 @@ spec:
         location: examples/multi-mig-http-lb
       - name: multiple-certs
         location: examples/multiple-certs
+      - name: pqc-https-gke
+        location: examples/pqc-https-gke
       - name: shared-vpc
         location: examples/shared-vpc
       - name: traffic-director
@@ -296,13 +300,13 @@ spec:
     roles:
       - level: Project
         roles:
-          - roles/storage.admin
-          - roles/compute.admin
-          - roles/run.admin
           - roles/iam.serviceAccountUser
           - roles/certificatemanager.owner
           - roles/vpcaccess.admin
           - roles/iam.serviceAccountAdmin
+          - roles/storage.admin
+          - roles/compute.admin
+          - roles/run.admin
     services:
       - certificatemanager.googleapis.com
       - cloudresourcemanager.googleapis.com
@@ -314,8 +318,8 @@ spec:
       - vpcaccess.googleapis.com
     providerVersions:
       - source: hashicorp/google
-        version: ">= 6.0, < 8"
+        version: ">= 6.0, < 9"
       - source: hashicorp/google-beta
-        version: ">= 6.0, < 8"
+        version: ">= 6.0, < 9"
       - source: hashicorp/random
         version: ">= 2.1"
